@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ListView">
+
+    <TextView
+        android:id="@+id/ReminderName"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/DueDate"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"  />
+
+    <Button
+        android:id="@+id/DeleteBtn"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:textSize="9sp"
+        android:text="Delete"/>
+
+    <Button
+        android:id="@+id/EditBtn"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="70dp"
+        android:layout_height="45dp"
+        android:textSize="9sp"
+        android:text="Edit" />
+</LinearLayout>
