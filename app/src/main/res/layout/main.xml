@@ -13,56 +13,40 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:text="Reminders"
-
+        android:textAlignment="center"
+        android:textStyle="bold"
         android:background="@color/teal_200"
         android:textSize="20sp"/>
 
 
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.75"
-            android:id="@+id/ReminderList"
-            android:divider="@color/material_blue_grey_800"
-            android:dividerHeight="1dp"
-            android:footerDividersEnabled="false">
-
-        </ListView>
-
-
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addreminder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_menu_add" />
-
-    <LinearLayout
+    <ListView
+        android:id="@+id/ReminderList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:orientation="horizontal">
+        android:layout_weight="0.7"
+        android:divider="@color/material_blue_grey_800"
+        android:dividerHeight="1dp"
+        android:footerDividersEnabled="false">
 
-        <Button
-            android:id="@+id/LogoutButt"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:onClick="GoToLogin"
-            android:layout_margin="5dp"
-            android:text="Log Out" />
+    </ListView>
 
-        <Button
-            android:id="@+id/ProfileButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.5"
-            android:layout_margin="5dp"
-            android:onClick="GoToProfile"
-            android:text="To Profile" />
-    </LinearLayout>
+
+    <Button
+        android:id="@+id/EditButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.075"
+        android:layout_margin="5dp"
+        android:text="Edit Reminders" />
+
+    <Button
+        android:id="@+id/LogoutButt"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="0.125"
+        android:onClick="GoToLogin"
+        android:text="Log Out" />
+
 
 </LinearLayout>

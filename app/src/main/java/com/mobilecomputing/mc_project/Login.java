@@ -12,6 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.biometric.BiometricManager;
+import androidx.biometric.BiometricPrompt;
+import androidx.core.content.ContextCompat;
+
+import java.util.concurrent.Executor;
 
 public class Login extends AppCompatActivity {
 
@@ -29,6 +36,49 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        //*******************************************************************************************************************************************************
+        //Login method : fingerprint
+        final Button FingerPBtn = findViewById(R.id.FingerprintBtn);
+
+        BiometricManager biometricManager = androidx.biometric.BiometricManager.from(this);
+
+        // creating a variable for our Executor
+        Executor executor = ContextCompat.getMainExecutor(this);
+        // this will give us result of AUTHENTICATION
+        final BiometricPrompt biometricPrompt = new BiometricPrompt(Login.this, executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+            }
+
+            // THIS METHOD IS CALLED WHEN AUTHENTICATION IS SUCCESS
+            @Override
+            public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                Intent intent = new Intent(getApplicationContext(), Main.class);
+                startActivity(intent);
+            }
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+            }
+        });
+
+        // creating a variable for our promptInfo
+        // BIOMETRIC DIALOG
+        final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("GFG")
+                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
+        FingerPBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                biometricPrompt.authenticate(promptInfo);
+
+            }
+        });
+
+        //****************************************************************************************************************************************************
+        //Login method : username and password
 
         preferences = getApplicationContext().getSharedPreferences("Log", 0);
         String test = preferences.getString(ADMINUSERNAME, "");
@@ -85,6 +135,3 @@ public class Login extends AppCompatActivity {
     }
 
 }
-
-
-
