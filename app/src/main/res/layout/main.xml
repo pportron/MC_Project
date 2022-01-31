@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/EnteteMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="Reminders"
+        android:background="@color/teal_200"
+        android:textSize="20sp"/>
+
+    <ScrollView
+        android:layout_width="388dp"
+        android:layout_height="754dp"
+        android:layout_weight="0.75">
+
+        <ListView
+            android:id="@+id/ListeReminders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/material_blue_grey_800"
+            android:dividerHeight="1dp">
+
+            <TextView
+                android:id="@+id/Reminder1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/Reminder2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </ListView>
+
+    </ScrollView>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addreminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@android:drawable/ic_menu_add" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/LogoutButt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:onClick="GoToLogin"
+            android:layout_margin="5dp"
+            android:text="Log Out" />
+
+        <Button
+            android:id="@+id/ProfileButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            android:onClick="GoToProfile"
+            android:text="To Profile" />
+    </LinearLayout>
+
+</LinearLayout>

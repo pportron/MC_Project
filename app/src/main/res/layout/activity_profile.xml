@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profile">
+
+    <TextView
+        android:id="@+id/EnteteProfile"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="Your Profile"
+        android:textSize="40sp"
+        android:textAlignment="center"
+        android:background="@color/purple_200"
+        android:textColor="@color/black"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Username"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Username : "
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+
+            />
+
+        <TextView
+            android:id="@+id/UsernameSaved"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="@string/SavedUsername"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Mail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Mail : "
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/MailSaved"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="@string/SavedMail"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/ProfilePicture"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:text="Profile Picture :  "
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            tools:srcCompat="@tools:sample/avatars" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ButtonBack"
+        android:layout_width="match_parent"
+        android:onClick="BackToReminder"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="Back To Reminder" />
+
+
+</LinearLayout>
