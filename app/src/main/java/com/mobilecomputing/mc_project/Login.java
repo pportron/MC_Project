@@ -25,12 +25,8 @@ public class Login extends AppCompatActivity {
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
-    private static final String ADMINUSERNAME="adminusername";
-    private static final String ADMINPASSWORD="adminpassword";
-
     private static final String KEY_USERNAME="username";
     private static final String KEY_PASSWORD="password";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +69,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 biometricPrompt.authenticate(promptInfo);
-
             }
         });
 
@@ -81,12 +76,12 @@ public class Login extends AppCompatActivity {
         //Login method : username and password
 
         preferences = getApplicationContext().getSharedPreferences("Log", 0);
-        String test = preferences.getString(ADMINUSERNAME, "");
+        String test = preferences.getString(KEY_USERNAME, "");
         if (test.equals(""))
         {
             editor = preferences.edit();
-            editor.putString(ADMINUSERNAME,"admin");
-            editor.putString(ADMINPASSWORD,"admin");
+            editor.putString(KEY_USERNAME,"test");
+            editor.putString(KEY_PASSWORD,"test");
             editor.apply();
         }
 
@@ -104,9 +99,6 @@ public class Login extends AppCompatActivity {
                 String UsernameSaved = preferences.getString(KEY_USERNAME, "");
                 String PasswordSaved = preferences.getString(KEY_PASSWORD,"");
 
-                String UsernameAdmin = preferences.getString(ADMINUSERNAME, "");
-                String PasswordAdmin = preferences.getString(ADMINPASSWORD,"");
-
                 if(UsernameEntered.length() <= 0){
                     Toast.makeText(Login.this, "Enter username", Toast.LENGTH_SHORT).show();
                 }
@@ -115,7 +107,7 @@ public class Login extends AppCompatActivity {
                 }
                 else {
 
-                    if (UsernameEntered.equals(UsernameSaved) && PasswordEntered.equals(PasswordSaved) || UsernameEntered.equals(UsernameAdmin) && PasswordEntered.equals(PasswordAdmin)) {
+                    if (UsernameEntered.equals(UsernameSaved) && PasswordEntered.equals(PasswordSaved)) {
                         Intent intent = new Intent(getApplicationContext(), Main.class);
                         startActivity(intent);
                     } else {
