@@ -17,6 +17,7 @@ public class Main extends AppCompatActivity {
     public void GoToLogin(View view) {
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+        //bite
     }
 
     public void GoToProfile(View view) {
