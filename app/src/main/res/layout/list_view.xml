@@ -7,7 +7,7 @@
     tools:context=".ListView">
 
     <TextView
-        android:id="@+id/ReminderName"
+        android:id="@+id/ReminderMessage"
         android:layout_width="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
@@ -15,7 +15,7 @@
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/DueDate"
+        android:id="@+id/ReminderTime"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
