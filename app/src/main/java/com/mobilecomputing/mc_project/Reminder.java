@@ -1,5 +1,6 @@
 package com.mobilecomputing.mc_project;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -11,13 +12,13 @@ import android.widget.TextView;
 
 public class Reminder extends BaseAdapter {
     Context context;
-    String Message[];
-    String reminder_time[];
-    String creation_time[];
-    String creator_id[];
-    int reminder_seen[];
-    double location_x[];
-    double location_y[];
+    String[] Message;
+    String[] reminder_time;
+    String[] creation_time;
+    String[] creator_id;
+    int[] reminder_seen;
+    double[] location_x;
+    double[] location_y;
     LayoutInflater inflter;
 
 
@@ -93,9 +94,9 @@ public class Reminder extends BaseAdapter {
         this.inflter = inflter;
     }
 
-    public Reminder(Context context, String[] message, String[] reminder_time, String[] creation_time, String[] creator_id, int[] reminder_seen, double[] location_x, double[] location_y) {
+    public Reminder(Context context, String[] Message, String[] reminder_time, String[] creation_time, String[] creator_id, int[] reminder_seen, double[] location_x, double[] location_y) {
         this.context = context;
-        this.Message = message;
+        this.Message = Message;
         this.reminder_time = reminder_time;
         this.creation_time = creation_time;
         this.creator_id = creator_id;
@@ -121,11 +122,24 @@ public class Reminder extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        view = inflter.inflate(R.layout.list_view, null);
+        view = LayoutInflater.from(context).inflate(R.layout.list_view, null);
         TextView Name = (TextView) view.findViewById(R.id.ReminderMessage);
         TextView Date = (TextView) view.findViewById(R.id.ReminderTime);
+        //TextView CT = (TextView) view.findViewById(R.id.ReminderCT);
+        TextView Ci = (TextView) view.findViewById(R.id.ReminderCI);
+        //TextView RS = (TextView) view.findViewById(R.id.ReminderRS);
+        TextView LX = (TextView) view.findViewById(R.id.ReminderLX);
+        TextView LY = (TextView) view.findViewById(R.id.ReminderLY);
         Name.setText(Message[i]);
         Date.setText(reminder_time[i]);
+        //CT.setText(creation_time[i]);
+        Ci.setText(creator_id[i]);
+        String stringdoublei = Integer.toString(reminder_seen[i]);
+        //RS.setText(stringdoublei);
+        String stringdoublex = Double.toString(location_x[i]);
+        LX.setText(stringdoublex);
+        String stringdoubley= Double.toString(location_y[i]);
+        LY.setText(stringdoubley);
         return view;
     }
 

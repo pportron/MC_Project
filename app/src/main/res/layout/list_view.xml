@@ -9,18 +9,54 @@
     <TextView
         android:id="@+id/ReminderMessage"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/ReminderTime"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"  />
+    <!--<TextView
+        android:id="@+id/ReminderCT"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />-->
+    <TextView
+        android:id="@+id/ReminderCI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:autoText="false"
+        android:textColor="@color/black" />
+    <!--<TextView
+        android:id="@+id/ReminderRS"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />-->
+    <TextView
+        android:id="@+id/ReminderLX"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />
+    <TextView
+        android:id="@+id/ReminderLY"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />
 
 
 </LinearLayout>
