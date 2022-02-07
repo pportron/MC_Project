@@ -1,41 +1,60 @@
 package com.mobilecomputing.mc_project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main extends AppCompatActivity {
 
-    ListView ListRmd;
-    String[] Message = new String[100];
-    String[] reminder_time = new String[100];
-    String[] creation_time = new String[100];
-    String[] creator_id = new String[100] ;
-    int[] reminder_seen = new int[100];
-    double[] location_x = new double[100];
-    double[] location_y = new double[100];
+    RecyclerView ListRmd;
+    private ArrayList<Reminder> arraylist;
+    private RecyclerViewAdapter recyclerviewadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        ListRmd = (ListView) findViewById(R.id.ReminderList);
+        ListRmd = (RecyclerView) findViewById(R.id.ReminderList);
 
         DBHandler dbHandler = new DBHandler(Main.this);
+        arraylist = new ArrayList<>();
+        Cursor c = dbHandler.readReminder();
+        while (c.moveToNext())
+        {
+            Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
+            arraylist.add(reminder);
+        }
 
-        Message = dbHandler.GetDataString("Message");
-        reminder_time = dbHandler.GetDataString("reminder_time");
-        creation_time = dbHandler.GetDataString("creation_time");
-        creator_id = dbHandler.GetDataString("creator_id");
-        reminder_seen = dbHandler.GetDataInt("reminder_seen");
-        location_x = dbHandler.GetDataDouble("location_x");
-        location_y = dbHandler.GetDataDouble("location_y");
+        recyclerviewadapter = new RecyclerViewAdapter(Main.this, arraylist, new ClickListener() {
+            @Override
+            public void onPositionClicked(int position) {
+                DBHandler dbHandler = new DBHandler(Main.this);
 
-        Reminder myreminder = new Reminder(getApplicationContext(), Message, reminder_time,creation_time,creator_id,reminder_seen,location_x,location_y);
-        ListRmd.setAdapter(myreminder);
+                Reminder rmd = arraylist.get(position);
+                int id = rmd.getId();
+                String Id = String.valueOf(id);
+                dbHandler.deleteReminder(Id);
+                Toast.makeText(Main.this, "Reminder deleted", Toast.LENGTH_SHORT).show();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
+            }
+        });
+        ListRmd.setAdapter(recyclerviewadapter);
+        ListRmd.setLayoutManager(new LinearLayoutManager(Main.this));
+
     }
 
     public void GoToLogin(View view) {
@@ -52,4 +71,9 @@ public class Main extends AppCompatActivity {
         Intent intent = new Intent(this, AddReminder.class);
         startActivity(intent);
     }
+    public void GoToUpdate(View view) {
+        Intent intent = new Intent(this, UpdateReminder.class);
+        startActivity(intent);
+    }
+
     }

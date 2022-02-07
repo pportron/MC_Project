@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+    <TextView
+        android:id="@+id/EnteteUR"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:text="Update Reminder"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:background="@color/teal_200"
+        android:textSize="20sp"/>
+    <EditText
+        android:id="@+id/IdMessage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:hint="Id of reminder to change"
+        android:inputType="number"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/UpdtMessage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:hint="New Message"
+        android:inputType="text"
+        android:textSize="20sp" />
+
+
+    <EditText
+        android:id="@+id/UpdtDate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:hint="New Due Date"
+        android:inputType="text"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/UpdtLocationX"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:hint="New Location X"
+        android:inputType="numberDecimal"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/UpdtLocationY"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:hint="New Location Y"
+        android:inputType="numberDecimal"
+        android:textSize="20sp" />
+
+
+    <Button
+        android:id="@+id/UpdateRmd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="0.1"
+        android:text="Update Reminder" />
+
+
+    <Button
+        android:id="@+id/BackToReminders"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:layout_margin="10dp"
+        android:onClick="BackToMain"
+        android:text="Back To Reminders" />
+
+
+</LinearLayout>

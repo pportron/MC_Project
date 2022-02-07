@@ -11,12 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MC_Project">
-
         <activity
-            android:name=".Profile"
+            android:name=".UpdateReminder"
             android:exported="false" />
         <activity
-            android:name=".ListView"
+            android:name=".Profile"
             android:exported="false" />
         <activity
             android:name=".Register"

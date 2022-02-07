@@ -12,16 +12,19 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // creating a constant variables for our database.
     // below variable is for our database name.
-    private static final String DB_NAME = "ReminderDB";
+    private static final String DB_NAME = "RemindersDB";
 
     // below int is our database version
     private static final int DB_VERSION = 1;
 
     // below variable is for our table name.
-    private static final String TABLE_NAME = "Reminder";
+    private static final String TABLE_NAME = "Reminders";
 
     // below variable is for our message column.
     private static final String MSG_COL = "Message";
+
+    // below variable is for our message column.
+    private static final String ID_COL = "Id";
 
     // below variable is for our rmd time column.
     private static final String TIME_COL = "reminder_time";
@@ -54,7 +57,8 @@ public class DBHandler extends SQLiteOpenHelper {
         // setting our column names
         // along with their data types.
         String query = "CREATE TABLE " + TABLE_NAME + " ("
-                + MSG_COL + " TEXT PRIMARY KEY, "
+                + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + MSG_COL + " TEXT,"
                 + TIME_COL + " TEXT,"
                 + CREATION_COL + " TEXT,"
                 + CREATOR_COL + " TEXT,"
@@ -98,19 +102,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteReminder(String message) {
+    public void deleteReminder(String Idmessage) {
 
         // on below line we are creating
         // a variable to write our database.
         SQLiteDatabase db = this.getWritableDatabase();
 
+
         // on below line we are calling a method to delete our
         // course and we are comparing it with our course name.
-        db.delete(TABLE_NAME, "name=?", new String[]{message});
+        db.delete(TABLE_NAME, ID_COL + "=" + Idmessage, null);
         db.close();
     }
 
-    public void updateReminder(String originalmessage, String message, String reminder_time, String creation_time, String creator_id, int reminder_seen, double location_x, double location_y) {
+    public void updateReminder(String IdMessage, String message, String reminder_time, String creation_time, String creator_id, int reminder_seen, double location_x, double location_y) {
 
         // calling a method to get writable database.
         SQLiteDatabase db = this.getWritableDatabase();
@@ -128,59 +133,22 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // on below line we are calling a update method to update our database and passing our values.
         // and we are comparing it with name of our course which is stored in original name variable.
-        db.update(TABLE_NAME, values, "name=?", new String[]{originalmessage});
+        db.update(TABLE_NAME, values, "name=?", new String[]{IdMessage});
         db.close();
     }
-    public String[] GetDataString(String colname) {
-        String[] result = new String[100];
+
+    public Cursor  readReminder() {
+        // on below line we are creating a
+        // database for reading our database.
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME,new String[]{MSG_COL,TIME_COL,CREATION_COL,CREATOR_COL,SEEN_COL,LOCX_COL,LOCY_COL},colname,null,null,null,null);
 
-        int icol = c.getColumnIndex(colname);
-        int i = 0;
+        // on below line we are creating a cursor with query to read data from database.
+        Cursor cursorRmd = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
 
-        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-        {
-            result[i] = c.getString(icol);
-            i++;
-        }
-
-        return result;
+        return cursorRmd;
     }
 
-    public int[] GetDataInt(String colname) {
-        int result[] = new int[100];
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME,new String[]{MSG_COL,TIME_COL,CREATION_COL,CREATOR_COL,SEEN_COL,LOCX_COL,LOCY_COL},colname,null,null,null,null);
 
-        int icol = c.getColumnIndex(colname);
-        int i = 0;
-
-        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-        {
-            result[i] = c.getInt(icol);
-            i++;
-        }
-
-        return result;
-    }
-
-    public double[] GetDataDouble(String colname) {
-        double result[] = new double[100];
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME,new String[]{MSG_COL,TIME_COL,CREATION_COL,CREATOR_COL,SEEN_COL,LOCX_COL,LOCY_COL},colname,null,null,null,null);
-
-        int icol = c.getColumnIndex(colname);
-        int i = 0;
-
-        for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext())
-        {
-            result[i] = c.getDouble(icol);
-            i++;
-        }
-
-        return result;
-    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
