@@ -133,7 +133,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         // on below line we are calling a update method to update our database and passing our values.
         // and we are comparing it with name of our course which is stored in original name variable.
-        db.update(TABLE_NAME, values, "name=?", new String[]{IdMessage});
+        db.update(TABLE_NAME, values, "Id = ?", new String[]{ "" + IdMessage });
         db.close();
     }
 
@@ -149,6 +149,49 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
 
+    public String GetAMessage(String id) {
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select Message from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getString(0);
+
+        return result;
+    }
+
+    public String GetATime(String id) {
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select reminder_time from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getString(0);
+
+        return result;
+    }
+
+    public double GetALocX(String id) {
+        double result;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select location_x from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getDouble(0);
+
+        return result;
+    }
+
+    public double GetALocY(String id) {
+        double result;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select location_y from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getDouble(0);
+
+        return result;
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

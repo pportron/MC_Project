@@ -20,6 +20,7 @@ public class Main extends AppCompatActivity {
     RecyclerView ListRmd;
     private ArrayList<Reminder> arraylist;
     private RecyclerViewAdapter recyclerviewadapter;
+    private String classname = "Main";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class Main extends AppCompatActivity {
             arraylist.add(reminder);
         }
 
-        recyclerviewadapter = new RecyclerViewAdapter(Main.this, arraylist, new ClickListener() {
+        recyclerviewadapter = new RecyclerViewAdapter(Main.this,classname, arraylist, new ClickListener() {
             @Override
             public void onPositionClicked(int position) {
                 DBHandler dbHandler = new DBHandler(Main.this);
