@@ -74,7 +74,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
             else
             {
-                btn.setVisibility(View.INVISIBLE);
+                btn.setVisibility(View.GONE);
                 id.setVisibility(View.VISIBLE);
             }
 

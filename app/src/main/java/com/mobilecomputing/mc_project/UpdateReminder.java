@@ -3,6 +3,9 @@ package com.mobilecomputing.mc_project;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class UpdateReminder extends AppCompatActivity {
 
@@ -25,7 +32,6 @@ public class UpdateReminder extends AppCompatActivity {
     RecyclerView ListRmd;
     private RecyclerViewAdapter recyclerviewadapter;
     private String classname = "UpdateReminder";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +119,6 @@ public class UpdateReminder extends AppCompatActivity {
                 overridePendingTransition(0, 0);
                 startActivity(getIntent());
                 overridePendingTransition(0, 0);
-
             }
         });
     }

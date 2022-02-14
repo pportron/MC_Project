@@ -54,7 +54,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:layout_margin="10dp"
-        android:hint="Due Date"
+        android:hint="Enter Date : '.. / .. / ....'"
         android:inputType="text"
         android:textSize="20sp" />
 
