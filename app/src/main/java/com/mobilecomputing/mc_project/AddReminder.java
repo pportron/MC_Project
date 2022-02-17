@@ -10,6 +10,7 @@ import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -41,6 +42,8 @@ public class AddReminder extends AppCompatActivity {
     private static final String KEY_USERNAME = "username";
 
     private static final String TIME_KEY = "TimeKey";
+    private static final String ID_KEY = "IdKey";
+    private ArrayList<Reminder> arraylist;
 
     public static final Integer RecordAudioRequestCode = 1;
     private SpeechRecognizer speechRecognizer;
@@ -147,6 +150,21 @@ public class AddReminder extends AppCompatActivity {
                 String Strlocation_y = LyET.getText().toString();
                 double location_y = Double.parseDouble(Strlocation_y);
 
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Long date = null;
+                try {
+                    date = df.parse(remember_time).getTime();
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long actualDate = System.currentTimeMillis();
+                long timetodate = date-actualDate;
+                if (timetodate <= 0)
+                {
+                    reminder_seen = 1;
+                }
+
                 if (Message.length() <= 0) {
                     Toast.makeText(AddReminder.this, "Enter message", Toast.LENGTH_SHORT).show();
                 } else if (remember_time.length() != 10) {
@@ -160,20 +178,22 @@ public class AddReminder extends AppCompatActivity {
                     dbHandler.addNewReminder(Message, remember_time, creation_time, creator_id, reminder_seen, location_x, location_y);
                     Toast.makeText(AddReminder.this, "Reminder Added", Toast.LENGTH_SHORT).show();
 
-                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                    Long date = null;
-                    try {
-                        date = df.parse(remember_time).getTime();
 
-                    } catch (ParseException e) {
-                        e.printStackTrace();
+                    arraylist = new ArrayList<>();
+                    int i = 0;
+                    Cursor c = dbHandler.readReminder();
+                    while (c.moveToNext())
+                    {
+                        Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
+                        arraylist.add(reminder);
+                        i++;
                     }
-                    long actualDate = System.currentTimeMillis();
-                    long timetodate = date-actualDate;
+                    Reminder rmd = arraylist.get(i-1);
+                    int ID = rmd.getId();
 
                     final OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(myWorker.class)
                             .setInitialDelay(timetodate, TimeUnit.MILLISECONDS)
-                            .setInputData(new Data.Builder().putString(TIME_KEY,remember_time).build())
+                            .setInputData(new Data.Builder().putString(TIME_KEY,remember_time).putInt(ID_KEY,ID).build())
                             .addTag(Message)
                             .build();
 

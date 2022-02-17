@@ -171,6 +171,28 @@ public class DBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public String GetACreatTime(String id) {
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select creation_time from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getString(0);
+
+        return result;
+    }
+
+    public String GetACreator(String id) {
+        String result = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select creator_id from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getString(0);
+
+        return result;
+    }
+
     public double GetALocX(String id) {
         double result;
         SQLiteDatabase db = this.getReadableDatabase();

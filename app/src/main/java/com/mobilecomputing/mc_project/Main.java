@@ -32,7 +32,10 @@ public class Main extends AppCompatActivity {
         while (c.moveToNext())
         {
             Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
-            arraylist.add(reminder);
+            if (reminder.getReminder_seen() == 1)
+            {
+                arraylist.add(reminder);
+            }
         }
 
         recyclerviewadapter = new RecyclerViewAdapter(Main.this,classname, arraylist, new ClickListener() {
