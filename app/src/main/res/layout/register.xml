@@ -6,16 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".Register">
 
+    <Button
+        android:id="@+id/ValidateRegisterButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="96dp"
+        android:text="Validate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/GoBackBtn" />
+
+    <Button
+        android:id="@+id/GoBackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="31dp"
+        android:onClick="BackToLogin"
+        android:text="Back To Login"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ValidateRegisterButton"
+        app:layout_constraintEnd_toStartOf="@+id/ValidateRegisterButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/enteteregister"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/teal_200"
         android:text="Register"
         android:textAlignment="center"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,46 +44,35 @@
         android:id="@+id/NewUsernameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="51dp"
+        android:layout_marginTop="92dp"
         android:hint="Username"
         android:inputType="textPersonName"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/NewPasswordEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enteteregister" />
 
     <EditText
         android:id="@+id/NewPasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="239dp"
+        android:layout_marginTop="61dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/NewUsernameEditText"
+        app:layout_constraintTop_toBottomOf="@+id/NewUsernameEditText" />
 
     <EditText
         android:id="@+id/ConfirmPasswordEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="356dp"
+        android:layout_marginTop="95dp"
         android:hint="Confirm Password"
         android:inputType="textPassword"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/ValidateRegisterButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginBottom="167dp"
-        android:text="Validate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/ConfirmPasswordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/NewPasswordEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

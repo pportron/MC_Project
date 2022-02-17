@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,11 +20,21 @@ public class Main extends AppCompatActivity {
     private ArrayList<Reminder> arraylist;
     private RecyclerViewAdapter recyclerviewadapter;
     private String classname = "Main";
+    private static final String KEY_SHOW = "ToShow";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+
+        Bundle Extras = getIntent().getExtras();
+        int ToShow=0;
+        if (Extras != null)
+        {
+            ToShow = 1;
+        }
+
+
         ListRmd = (RecyclerView) findViewById(R.id.ReminderList);
 
         DBHandler dbHandler = new DBHandler(Main.this);
@@ -32,7 +43,7 @@ public class Main extends AppCompatActivity {
         while (c.moveToNext())
         {
             Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
-            if (reminder.getReminder_seen() == 1)
+            if (reminder.getReminder_seen() == 1 || ToShow == 1)
             {
                 arraylist.add(reminder);
             }
@@ -57,6 +68,18 @@ public class Main extends AppCompatActivity {
         ListRmd.setAdapter(recyclerviewadapter);
         ListRmd.setLayoutManager(new LinearLayoutManager(Main.this));
 
+        Button ShowBtn = (Button) findViewById(R.id.ShowAllBtn);
+        ShowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(0, 0);
+                Intent intent = getIntent();
+                intent.putExtra(KEY_SHOW,"1");
+                startActivity(intent);
+                overridePendingTransition(0, 0);
+            }
+        });
     }
 
     public void GoToLogin(View view) {
