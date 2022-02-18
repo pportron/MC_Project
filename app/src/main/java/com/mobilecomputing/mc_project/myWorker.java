@@ -41,7 +41,6 @@ public class myWorker extends Worker {
         int reminder_seen = 1;
         dbHandler.updateReminder(Id,Message, remember_time, creation_time, creator_id, reminder_seen, location_x, location_y);
 
-
         return Result.success();
     }
 

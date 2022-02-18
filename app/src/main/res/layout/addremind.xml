@@ -58,35 +58,59 @@
         android:inputType="text"
         android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/LocationX"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:layout_margin="10dp"
-        android:hint="Location X"
-        android:inputType="numberDecimal"
-        android:textSize="20sp" />
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/LocationY"
+        <EditText
+            android:id="@+id/LocationY"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:hint="Location Y"
+            android:inputType="numberDecimal"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/LocationX"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:hint="Location X"
+            android:inputType="numberDecimal"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.1"
-        android:layout_margin="10dp"
-        android:hint="Location Y"
-        android:inputType="numberDecimal"
-        android:textSize="20sp" />
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/AddNewRButt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_weight="0.5"
+            android:text="Add Reminder" />
 
 
-    <Button
-        android:id="@+id/AddNewRButt"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:layout_weight="0.1"
-        android:text="Add Reminder" />
-
+        <CheckBox
+            android:id="@+id/NotifBox"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:layout_margin="5dp"
+            android:text="Notification" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/BackToReminders"

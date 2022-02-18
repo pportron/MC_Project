@@ -14,6 +14,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -138,6 +139,7 @@ public class AddReminder extends AppCompatActivity {
         BtnADDRMD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CheckBox NotifCheckBox = (CheckBox) findViewById(R.id.NotifBox);
 
                 String Message = MsgET.getText().toString();
                 String remember_time = DtET.getText().toString();
@@ -160,7 +162,7 @@ public class AddReminder extends AppCompatActivity {
                 }
                 long actualDate = System.currentTimeMillis();
                 long timetodate = date-actualDate;
-                if (timetodate <= 0)
+                if (timetodate <= 0 || !NotifCheckBox.isChecked())
                 {
                     reminder_seen = 1;
                 }
@@ -178,26 +180,29 @@ public class AddReminder extends AppCompatActivity {
                     dbHandler.addNewReminder(Message, remember_time, creation_time, creator_id, reminder_seen, location_x, location_y);
                     Toast.makeText(AddReminder.this, "Reminder Added", Toast.LENGTH_SHORT).show();
 
-
-                    arraylist = new ArrayList<>();
-                    int i = 0;
-                    Cursor c = dbHandler.readReminder();
-                    while (c.moveToNext())
+                    if (NotifCheckBox.isChecked())
                     {
-                        Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
-                        arraylist.add(reminder);
-                        i++;
+                        arraylist = new ArrayList<>();
+                        int i = 0;
+                        Cursor c = dbHandler.readReminder();
+                        while (c.moveToNext())
+                        {
+                            Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
+                            arraylist.add(reminder);
+                            i++;
+                        }
+                        Reminder rmd = arraylist.get(i-1);
+                        int ID = rmd.getId();
+
+                        final OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(myWorker.class)
+                                .setInitialDelay(timetodate, TimeUnit.MILLISECONDS)
+                                .setInputData(new Data.Builder().putString(TIME_KEY,remember_time).putInt(ID_KEY,ID).build())
+                                .addTag(Message)
+                                .build();
+
+                        WorkManager.getInstance().enqueue(request);
                     }
-                    Reminder rmd = arraylist.get(i-1);
-                    int ID = rmd.getId();
 
-                    final OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(myWorker.class)
-                            .setInitialDelay(timetodate, TimeUnit.MILLISECONDS)
-                            .setInputData(new Data.Builder().putString(TIME_KEY,remember_time).putInt(ID_KEY,ID).build())
-                            .addTag(Message)
-                            .build();
-
-                    WorkManager.getInstance().enqueue(request);
 
                 }
 

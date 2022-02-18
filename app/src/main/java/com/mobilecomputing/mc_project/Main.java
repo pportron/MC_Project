@@ -27,14 +27,6 @@ public class Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Bundle Extras = getIntent().getExtras();
-        int ToShow=0;
-        if (Extras != null)
-        {
-            ToShow = 1;
-        }
-
-
         ListRmd = (RecyclerView) findViewById(R.id.ReminderList);
 
         DBHandler dbHandler = new DBHandler(Main.this);
@@ -43,7 +35,7 @@ public class Main extends AppCompatActivity {
         while (c.moveToNext())
         {
             Reminder reminder = new Reminder(c.getInt(0),c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getInt(5),c.getDouble(6),c.getDouble(7));
-            if (reminder.getReminder_seen() == 1 || ToShow == 1)
+            if (reminder.getReminder_seen() == 1 || getIntent().getExtras() != null)
             {
                 arraylist.add(reminder);
             }
