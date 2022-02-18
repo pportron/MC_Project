@@ -215,6 +215,17 @@ public class DBHandler extends SQLiteOpenHelper {
         return result;
     }
 
+    public int GetASeen(String id) {
+        int result;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery( "select reminder_seen from "+TABLE_NAME +" where Id =" +id, null );
+
+        c.moveToFirst();
+        result = c.getInt(0);
+
+        return result;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.

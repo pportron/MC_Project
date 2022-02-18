@@ -26,56 +26,72 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <EditText
-        android:id="@+id/IdMessage"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:layout_margin="10dp"
-        android:hint="Id of reminder to change"
-        android:inputType="number"
-        android:textSize="20sp" />
+        android:layout_weight="0.1"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/UpdtMessage"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:layout_margin="10dp"
-        android:hint="New Message"
-        android:inputType="text"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/IdMessage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.4"
+            android:hint="Id "
+            android:inputType="number"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/UpdtMessage"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.6"
+            android:hint="New Message"
+            android:inputType="text"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 
     <EditText
         android:id="@+id/UpdtDate"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.05"
+        android:layout_weight="0.1"
         android:layout_margin="10dp"
-        android:hint="New Due Date"
+        android:hint="New Due Date : '.. / .. / ....'"
         android:inputType="text"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/UpdtLocationX"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:layout_margin="10dp"
-        android:hint="New Location X"
-        android:inputType="numberDecimal"
-        android:textSize="20sp" />
+        android:layout_weight="0.1"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/UpdtLocationY"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:layout_margin="10dp"
-        android:hint="New Location Y"
-        android:inputType="numberDecimal"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/UpdtLocationX"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:hint="New Loc X"
+            android:inputType="numberDecimal"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/UpdtLocationY"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:hint="New Loc Y"
+            android:inputType="numberDecimal"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 
     <Button

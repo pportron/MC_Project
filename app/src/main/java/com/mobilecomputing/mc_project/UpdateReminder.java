@@ -71,7 +71,7 @@ public class UpdateReminder extends AppCompatActivity {
                 String creation_time = java.text.DateFormat.getDateTimeInstance().format(new Date());
                 preferences = getApplicationContext().getSharedPreferences("Log", 0);
                 String creator_id = preferences.getString(KEY_USERNAME, "");
-                int reminder_seen = 0;
+                int reminder_seen = dbHandler.GetASeen(Id);
                 String Strlocation_x = LxET.getText().toString();
                 double location_x = 0;
                 if (Strlocation_x.length() > 0) {
