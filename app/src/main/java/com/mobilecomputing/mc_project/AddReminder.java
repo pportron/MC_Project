@@ -162,7 +162,7 @@ public class AddReminder extends AppCompatActivity {
                 }
                 long actualDate = System.currentTimeMillis();
                 long timetodate = date-actualDate;
-                if (timetodate <= 0 || !NotifCheckBox.isChecked())
+                if (timetodate <= 0)
                 {
                     reminder_seen = 1;
                 }

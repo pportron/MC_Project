@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -98,6 +101,20 @@ public class UpdateReminder extends AppCompatActivity {
                 if (remember_time.length() == 0)
                 {
                     remember_time = dbHandler.GetATime(Id);
+                }
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Long date = null;
+                try {
+                    date = df.parse(remember_time).getTime();
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                long actualDate = System.currentTimeMillis();
+                long timetodate = date-actualDate;
+                if (timetodate <= 0)
+                {
+                    reminder_seen = 1;
                 }
                 if (Strlocation_x.length() == 0)
                 {

@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -90,6 +89,11 @@ public class Main extends AppCompatActivity {
     }
     public void GoToUpdate(View view) {
         Intent intent = new Intent(this, UpdateReminder.class);
+        startActivity(intent);
+    }
+
+    public void GoToMap(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 
