@@ -60,14 +60,50 @@
             android:layout_weight="0.5" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/BackToMain"
-        android:layout_margin="10dp"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:onClick="BackToMain"
         android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:text="Back To Reminders" />
+        android:layout_weight="0.2"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/locx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:text="Location X :" />
+
+        <TextView
+            android:id="@+id/loglocx"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.2"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/locy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:textAlignment="center"
+            android:text="Location Y :" />
+
+        <TextView
+            android:id="@+id/loglocy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5" />
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/LogoutButtP"
@@ -77,4 +113,10 @@
         android:layout_height="0dp"
         android:layout_weight="0.1"
         android:text="Logout" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu" />
 </LinearLayout>

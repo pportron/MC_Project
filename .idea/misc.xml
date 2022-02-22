@@ -6,9 +6,11 @@
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/drawable/ic_baseline_keyboard_arrow_down_24.xml" value="0.1" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/aadd_reminder.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/activity_main.xml" value="0.10666666666666667" />
+        <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/activity_profile.xml" value="0.22" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/activity_register.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/addremind.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/bottom_navigation_menu.xml" value="0.1" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/delete.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/layout_reminder.xml" value="0.22" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/layout_reminder_update.xml" value="0.1" />
@@ -18,6 +20,7 @@
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/mapwithmarker.xml" value="0.1" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/profile.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/pport/MC_Project/app/src/main/res/layout/update_reminder.xml" value="0.22" />
+        <entry key="..\:/Users/pport/MC_Project/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
       </map>
     </option>
   </component>

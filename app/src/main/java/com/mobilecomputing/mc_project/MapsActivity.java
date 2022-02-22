@@ -1,5 +1,6 @@
 package com.mobilecomputing.mc_project;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
@@ -9,8 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,12 +18,13 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mobilecomputing.mc_project.databinding.ActivityMapsBinding;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
@@ -38,6 +39,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String ID_KEY = "IdKey";
 
     private ArrayList<Reminder> arraylist;
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,5 +135,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }while (i < nbrmd);
             }
         });
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.page_map);
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.page_rmd:
+                Intent intent4 = new Intent(this, Main.class);
+                startActivity(intent4);
+                return true;
+
+            case R.id.page_add:
+                Intent intent1 = new Intent(this, AddReminder.class);
+                startActivity(intent1);
+                return true;
+
+            case R.id.page_update:
+                Intent intent2 = new Intent(this, UpdateReminder.class);
+                startActivity(intent2);
+                return true;
+
+            case R.id.page_profile:
+                Intent intent3 = new Intent(this, Profile.class);
+                startActivity(intent3);
+                return true;
+
+            case R.id.page_map:
+                return true;
+        }
+        return false;
     }
 }

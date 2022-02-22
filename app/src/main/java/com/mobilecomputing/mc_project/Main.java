@@ -1,5 +1,6 @@
 package com.mobilecomputing.mc_project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,19 +8,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 
-public class Main extends AppCompatActivity {
+public class Main extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView ListRmd;
     private ArrayList<Reminder> arraylist;
     private RecyclerViewAdapter recyclerviewadapter;
     private String classname = "Main";
     private static final String KEY_SHOW = "ToShow";
+
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,30 +77,39 @@ public class Main extends AppCompatActivity {
                 overridePendingTransition(0, 0);
             }
         });
+
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.page_rmd);
     }
 
-    public void GoToLogin(View view) {
-        Intent intent = new Intent(this, Login.class);
-        startActivity(intent);
-    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-    public void GoToProfile(View view) {
-        Intent intent = new Intent(this, Profile.class);
-        startActivity(intent);
-    }
+        switch (item.getItemId()) {
+            case R.id.page_rmd:
+                return true;
 
-    public void GoToAddReminder(View view) {
-        Intent intent = new Intent(this, AddReminder.class);
-        startActivity(intent);
-    }
-    public void GoToUpdate(View view) {
-        Intent intent = new Intent(this, UpdateReminder.class);
-        startActivity(intent);
-    }
+            case R.id.page_add:
+                Intent intent1 = new Intent(this, AddReminder.class);
+                startActivity(intent1);
+                return true;
 
-    public void GoToMap(View view) {
-        Intent intent = new Intent(this, MapsActivity.class);
-        startActivity(intent);
-    }
+            case R.id.page_update:
+                Intent intent2 = new Intent(this, UpdateReminder.class);
+                startActivity(intent2);
+                return true;
 
+            case R.id.page_profile:
+                Intent intent3 = new Intent(this, Profile.class);
+                startActivity(intent3);
+                return true;
+
+            case R.id.page_map:
+                Intent intent4 = new Intent(this, MapsActivity.class);
+                startActivity(intent4);
+                return true;
+        }
+        return false;
+    }
     }

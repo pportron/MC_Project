@@ -102,15 +102,11 @@
         android:layout_weight="0.05"
         android:text="Update Reminder" />
 
-
-    <Button
-        android:id="@+id/BackToReminders"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05"
-        android:layout_margin="10dp"
-        android:onClick="BackToMain"
-        android:text="Back To Reminders" />
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu" />
 
 
 </LinearLayout>
