@@ -2,6 +2,8 @@ package com.mobilecomputing.mc_project;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
@@ -11,6 +13,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,7 +25,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mobilecomputing.mc_project.databinding.ActivityMapsBinding;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -40,6 +42,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private ArrayList<Reminder> arraylist;
 
+    RecyclerView ListRmd;
+    private ArrayList<Reminder> arraynearrmd;
+    private RecyclerViewAdapter recyclerviewadapter;
+
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -55,15 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -94,8 +91,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 DBHandler dbHandler = new DBHandler(MapsActivity.this);
                 arraylist = new ArrayList<>();
-                ArrayList<Reminder> arraylocx = new ArrayList<>();
-                ArrayList<Reminder> arraylocy = new ArrayList<>();
                 Cursor c = dbHandler.readReminder();
                 int nbrmd = 0;
                 while (c.moveToNext())
@@ -104,6 +99,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     arraylist.add(reminder);
                     nbrmd++;
                 }
+                ListRmd = (RecyclerView) findViewById(R.id.NearRmdList);
+                arraynearrmd = new ArrayList<>();
                 int i = 0;
                 do {
                     if (arraylist.get(i) != null)
@@ -117,9 +114,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         String LocYonMap = preferences.getString(KEY_LOCY, "0");
                         Double locxonmap = Double.parseDouble(LocXonMap);
                         Double locyonmap = Double.parseDouble(LocYonMap);
-                        if ((LocX - locxonmap <= 1 && LocX - locxonmap >= -1) && (LocY - locyonmap <= 1 && LocY - locyonmap >= -1))
+                        if ((LocX - locxonmap <= 5 && LocX - locxonmap >= -5) && (LocY - locyonmap <= 5 && LocY - locyonmap >= -5))
                         {
-                            String rmdtime = rmd.getReminder_time();
+                            arraynearrmd.add(rmd);
+                            /*String rmdtime = rmd.getReminder_time();
                             String Msg = rmd.getMessage();
                             final OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(myWorker.class)
                                     .setInputData(new Data.Builder().putString(TIME_KEY,rmdtime).putInt(ID_KEY,id).build())
@@ -128,11 +126,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             WorkManager.getInstance().enqueue(request);
                             Intent intent = new Intent(MapsActivity.this, Main.class);
-                            startActivity(intent);
+                            startActivity(intent);*/
                         }
                         i++;
                     }
                 }while (i < nbrmd);
+                recyclerviewadapter = new RecyclerViewAdapter(MapsActivity.this,"MapsActivity", arraynearrmd, new ClickListener() {
+                    @Override
+                    public void onPositionClicked(int position) {
+                    }
+                });
+                ListRmd.setAdapter(recyclerviewadapter);
+                ListRmd.setLayoutManager(new LinearLayoutManager(MapsActivity.this));
+                ListRmd.setVisibility(View.VISIBLE);
             }
         });
 

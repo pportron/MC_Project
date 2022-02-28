@@ -72,10 +72,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 btn.setVisibility(View.VISIBLE);
                 id.setVisibility(View.GONE);
             }
-            else
+            else if (classname.equals("UpdateReminder"))
             {
                 btn.setVisibility(View.GONE);
                 id.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                btn.setVisibility(View.GONE);
+                id.setVisibility(View.GONE);
             }
 
         }
