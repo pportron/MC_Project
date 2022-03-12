@@ -65,6 +65,16 @@
         android:layout_margin="5dp"
         android:orientation="horizontal">
 
+                <EditText
+            android:id="@+id/LocationX"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.5"
+            android:hint="Location X"
+            android:inputType="numberSigned|numberDecimal"
+            android:textSize="20sp" />
+
         <EditText
             android:id="@+id/LocationY"
             android:layout_width="0dp"
@@ -72,17 +82,7 @@
             android:layout_margin="5dp"
             android:layout_weight="0.5"
             android:hint="Location Y"
-            android:inputType="numberSigned"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/LocationX"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_weight="0.5"
-            android:hint="Location X"
-            android:inputType="numberSigned"
+            android:inputType="numberSigned|numberDecimal"
             android:textSize="20sp" />
     </LinearLayout>
 

@@ -11,7 +11,10 @@ import androidx.work.WorkManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -66,29 +69,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.clear();
         LatLng Helsinki= new LatLng(60,25);
-        mMap.addMarker(new MarkerOptions().position(Helsinki).title("You are here"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(Helsinki));
-
-        preferences = getApplicationContext().getSharedPreferences("Loc", 0);
-        editor = preferences.edit();
-        String loc_x = Double.toString(Helsinki.longitude);
-        String loc_y = Double.toString(Helsinki.latitude);
-        editor.putString(KEY_LOCX, loc_x);
-        editor.putString(KEY_LOCY,loc_y);
 
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-
                 mMap.clear();
-                //Log.d("Marker at : ", latLng.longitude + "-" + latLng.latitude);
-                mMap.addMarker(new MarkerOptions().position(latLng).title("You are here"));
-                String loc_x = Double.toString(latLng.longitude);
-                String loc_y = Double.toString(latLng.latitude);
-                editor.putString(KEY_LOCX, loc_x);
-                editor.putString(KEY_LOCY,loc_y);
-                editor.commit();
-
+                mMap.addMarker(new MarkerOptions().position(latLng));
                 DBHandler dbHandler = new DBHandler(MapsActivity.this);
                 arraylist = new ArrayList<>();
                 Cursor c = dbHandler.readReminder();
@@ -106,27 +93,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if (arraylist.get(i) != null)
                     {
                         Reminder rmd = arraylist.get(i);
-                        int id = rmd.getId();
                         Double LocX = rmd.getLocation_x();
                         Double LocY = rmd.getLocation_y();
-                        preferences = getApplicationContext().getSharedPreferences("Loc", 0);
-                        String LocXonMap = preferences.getString(KEY_LOCX, "0");
-                        String LocYonMap = preferences.getString(KEY_LOCY, "0");
-                        Double locxonmap = Double.parseDouble(LocXonMap);
-                        Double locyonmap = Double.parseDouble(LocYonMap);
-                        if ((LocX - locxonmap <= 5 && LocX - locxonmap >= -5) && (LocY - locyonmap <= 5 && LocY - locyonmap >= -5))
+                        Double locxonmap = latLng.latitude;
+                        Double locyonmap = latLng.longitude;
+                        if ((LocX - locxonmap <= 0.5 && LocX - locxonmap >= -0.5) && (LocY - locyonmap <= 0.5 && LocY - locyonmap >= -0.5))
                         {
                             arraynearrmd.add(rmd);
-                            /*String rmdtime = rmd.getReminder_time();
-                            String Msg = rmd.getMessage();
-                            final OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(myWorker.class)
-                                    .setInputData(new Data.Builder().putString(TIME_KEY,rmdtime).putInt(ID_KEY,id).build())
-                                    .addTag(Msg)
-                                    .build();
-
-                            WorkManager.getInstance().enqueue(request);
-                            Intent intent = new Intent(MapsActivity.this, Main.class);
-                            startActivity(intent);*/
                         }
                         i++;
                     }
@@ -141,11 +114,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 ListRmd.setVisibility(View.VISIBLE);
             }
         });
-
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.page_map);
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
